@@ -46,7 +46,7 @@ def deep_extract_match(data, match):
 
 def deep_extract(data, key_match) -> Generator:
     """
-        Given a nests dictionary 'data'
+        Given a nested dictionary 'data'
         Walk dictionaries/lists looking for keys that match 'key_match'
     """
     if hasattr(key_match, '__call__'):
@@ -65,7 +65,7 @@ def deep_extract_items(data, key_match) -> List[DeepExtractItem]:
 
 def deep_extract_trace(data, key) -> (List[DeepExtractItem], List[Any]):
     """
-        Given a nests dictionary 'data'
+        Given a nested dictionary 'data'
         Walk dictionaries/lists looking for keys that match 'key'
         Give a list of items recovered and the path taken to retrieve them
     """

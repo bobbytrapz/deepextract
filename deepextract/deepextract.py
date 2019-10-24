@@ -73,8 +73,6 @@ def deep_extract_trace(data, key) -> (List[DeepExtractItem], List[Any]):
     work = deque()
     items = list(_deep_extract_trace(data, key, trace, work))
     return items, trace
-    # items = list(_deep_extract_trace2(data, key, work))
-    # return items, list(work)
 
 
 def _deep_extract_trace(data, key, trace, work):
@@ -97,20 +95,3 @@ def _deep_extract_trace(data, key, trace, work):
     if work:
         trace.append(list(work))
         work.clear()
-
-
-def _deep_extract_trace2(data, key, trace):
-    try:
-        for k, v in data.items():
-            if k == key:
-                trace.appendleft(DeepExtractItem(k, v))
-                yield DeepExtractItem(k, v)
-            for result in _deep_extract_trace2(v, key, trace):
-                trace.appendleft(k)
-                yield result
-    except AttributeError:
-        if isinstance(data, list):
-            for ndx, item in enumerate(data):
-                for result in _deep_extract_trace2(item, key, trace):
-                    trace.appendleft(ndx)
-                    yield result
